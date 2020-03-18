@@ -1,0 +1,296 @@
+(ExpressProject "openMV-RT"
+  (ProjectVersion "19981106")
+  (ProjectType "PCB")
+  (Folder "Design Resources"
+    (Folder "Library")
+    (NoModify)
+    (File ".\openmv-rt.dsn"
+      (Type "Schematic Design")
+      (DisplayName ".\openmv-rt.DSN"))
+    (BuildFileAddedOrDeleted "x")
+    (CompileFileAddedOrDeleted "x")
+    (DOCKED "TRUE")
+    (DOCKING_POSITION "59420")
+    (ANNOTATE_Scope "0")
+    (ANNOTATE_Mode "1")
+    (ANNOTATE_Action "1")
+    (Annotate_Page_Order "0")
+    (ANNOTATE_Reset_References_to_1 "FALSE")
+    (ANNOTATE_No_Page_Number_Change "FALSE")
+    (ANNOTATE_Property_Combine "{Value}{Source Package}{POWER_GROUP}")
+    (ANNOTATE_IncludeNonPrimitive "FALSE")
+    (ANNOTATE_PreserveDesignator "FALSE")
+    (ANNOTATE_PreserveUserEdits "FALSE")
+    (ANNOTATE_Refdes_Control_Required "FALSE")
+    (Update_Instace_for_External_Design "FALSE")
+    (Annotate_type "Default")
+    (width_pages "100")
+    (width_start "80")
+    (width_End "80")
+    (DRC_Scope "0")
+    (DRC_Action "0")
+    (DRC_Create_Warnings "FALSE")
+    (DRC_View_Output "FALSE")
+    (DRC_Preserved_Waived "FALSE")
+    (DRC_Run_Electrical_Rules "TRUE")
+    (DRC_Run_Physical_Rules "FALSE")
+    (DRC_Report_File "C:\Users\NXF42529\Documents\RT\openmv原理图\drc.DRC")
+    (DRC_Check_Ports "FALSE")
+    (DRC_Check_Off-Page_Connectors "FALSE")
+    (DRC_Report_Ports_and_Off-page_Connectors "FALSE")
+    (DRC_SDT_Compatibility "FALSE")
+    (DRC_Report_Off-grid_Objects "FALSE")
+    (DRC_Check_Unconnected_Nets "TRUE")
+    (DRC_Check_for_Misleading_TAP "FALSE")
+    (DRC_Report_Netnames "FALSE")
+    (DRC_Check_Single_Node_Nets "TRUE")
+    (DRC_Run_Electrical_Custom_DRC "FALSE")
+    (DRC_Check_No_Driving_Source "TRUE")
+    (DRC_Check_Duplicate_NetNames "TRUE")
+    (DRC_Check_Floating_Pins "TRUE")
+    (DRC_Check_Physical_Power_Pins_Visibility "TRUE")
+    (DRC_Check_PCB_Footprint_Property "TRUE")
+    (DRC_Check_Normal_Convert_View_Sync "TRUE")
+    (DRC_Check_Incorrect_PinGroup_Assignment "TRUE")
+    (DRC_Check_High_Speed_Props_Syntax "TRUE")
+    (DRC_Check_Missing_Pin_Numbers "TRUE")
+    (DRC_Check_Device_With_No_Pins "TRUE")
+    (DRC_Check_Power_Ground_Short "TRUE")
+    (DRC_Identical_References "TRUE")
+    (DRC_Type_Mismatch "TRUE")
+    (DRC_Visible_Power_pins "FALSE")
+    (DRC_Report_Unused_Part_Packages "TRUE")
+    (DRC_Check_Name_Prop_For_HierBlocks "TRUE")
+    (DRC_Run_Physical_Custom_DRC "FALSE")
+    (BOM_Scope "0")
+    (BOM_Mode "0")
+    (BOM_Report_File "C:\Users\NXF42529\Documents\RT\openmv原理图\2.9\bom.BOM")
+    (BOM_Merge_Include "FALSE")
+    (BOM_Property_Combine_7.0
+       "{Item}\t{Agile_PN}\t{Quantity}\t{Reference}\t{Value}\t{MFG_NAME01}\t{Description}\t{MFG_PN01}\t{PCB Footprint}\t{ASSY_OPT}")
+    (BOM_Header
+       "Item\tAgile_PN\tQuantity\tReference\tPart\tMFG_NAME01\tDescription\tMFG_PN01\tPCB Footprint\tASSY_OPT")
+    (BOM_Include_File
+       "C:\USERS\NXF42529\DOCUMENTS\RT\OPENMV原理图\OPENMV-RT.INC")
+    (BOM_Include_File_Combine_7.0 "{Item}\t{Quantity}\t{Reference}\t{Value}")
+    (BOM_One_Part_Per_Line "FALSE")
+    (Open_BOM_in_Excel "TRUE")
+    (BOM_View_Output "FALSE")
+    ("Create Allegro Netlist" "TRUE")
+    ("Allegro Netlist Directory"
+       "C:\USERS\NXF42529\DOCUMENTS\RT\OPENMV原理图\2.9\NETLIST")
+    ("View Allegro Netlist Files" "FALSE")
+    ("Allegro Netlist Create DCF File" "FALSE")
+    ("Update Allegro Board" "FALSE")
+    ("Allegro Netlist Output Board File" "allegro\OPENMV-RT.brd")
+    ("Allegro Netlist Remove Etch" "FALSE")
+    ("Allegro Netlist Place Changed Component" "ALWAYS_REPLACE")
+    ("Allegro Netlist Open Board in Allegro" "ALLEGRO")
+    ("Allegro Setup Backup Versions" "3")
+    ("Allegro Setup Output Warnings" "TRUE")
+    ("Allegro Setup Ignore Constraints" "FALSE")
+    ("Allegro Setup Part Type Length" "31")
+    ("Allegro Netlist Combine Property String" "PCB Footprint")
+    ("Allegro Netlist Ignore Fixed Property" "FALSE")
+    ("Allegro Netlist User Defined Property" "FALSE")
+    (Netlist_TAB "0")
+    (FLDSTUFF_Scope "0")
+    (FLDSTUFF_Action "0")
+    (FLDSTUFF_Report_File ".\openmv-rt.RPT")
+    (FLDSTUFF_Update_File ".\openmv-rt.UPD")
+    (FLDSTUFF__Uppercase_Result_Property "FALSE")
+    (FLDSTUFF_Uppercase_Update_Property "FALSE")
+    (FLDSTUFF_Uppercase_Unconditionally "FALSE")
+    (FLDSTUFF_Visibility "0")
+    (FLDSTUFF_inst_or_occurrence "0")
+    (FLDSTUFF_Create_Report_File "FALSE")
+    (Board_sim_option "VHDL_flow"))
+  (Folder "Outputs"
+    (File ".\drc.drc"
+      (Type "Report")
+      (DisplayName ".\drc.drc"))
+    (File ".\openmv-rt.bom"
+      (Type "Report")
+      (DisplayName ".\openmv-rt.bom"))
+    (File ".\openmv.bom"
+      (Type "Report")
+      (DisplayName ".\openmv.bom"))
+    (File "..\drc.drc"
+      (Type "Report")
+      (DisplayName "..\drc.drc"))
+    (File "..\openmv.bom"
+      (Type "Report"))
+    (File ".\bom.bom"
+      (Type "Report"))
+    (File ".\netlist\pstxnet.dat"
+      (Type "Report")
+      (DisplayName "pstxnet.dat"))
+    (File ".\netlist\pstxprt.dat"
+      (Type "Report")
+      (DisplayName "pstxprt.dat"))
+    (File ".\netlist\pstchip.dat"
+      (Type "Report")
+      (DisplayName "pstchip.dat"))
+    (File "..\2.8\bom.bom"
+      (Type "Report"))
+    (File "..\2.8\netlist\pstxnet.dat"
+      (Type "Report")
+      (DisplayName "pstxnet.dat"))
+    (File "..\2.8\netlist\pstxprt.dat"
+      (Type "Report")
+      (DisplayName "pstxprt.dat"))
+    (File "..\2.8\netlist\pstchip.dat"
+      (Type "Report")
+      (DisplayName "pstchip.dat"))
+    (File ".\pstxnet.dat"
+      (Type "Report")
+      (DisplayName "pstxnet.dat"))
+    (File ".\pstxprt.dat"
+      (Type "Report")
+      (DisplayName "pstxprt.dat"))
+    (File ".\pstchip.dat"
+      (Type "Report")
+      (DisplayName "pstchip.dat")))
+  (Folder "Referenced Projects")
+  (PartMRUSelector
+    (CAP_NP
+      (FullPartName "CAP_NP.Normal")
+      (LibraryName "D:\CADENCE_LIB\ORCADCIS\SYMBOLS\FCL_CAPACITOR.OLB")
+      (DeviceIndex "0"))
+    (CAP_POL
+      (FullPartName "CAP_POL.Normal")
+      (LibraryName
+         "C:\USERS\NXF42529\DOCUMENTS\CADENCE_LIB\ORCADCIS\SYMBOLS\FCL_CAPACITOR.OLB")
+      (DeviceIndex "0"))
+    (USB_MINI_AB_RECEPTACLE
+      (FullPartName "USB_MINI_AB_RECEPTACLE.Normal")
+      (LibraryName
+         "C:\USERS\NXF42529\DOCUMENTS\CADENCE_LIB\ORCADCIS\SYMBOLS\FCL_CONNECTOR.OLB")
+      (DeviceIndex "0"))
+    (Resistor_Array
+      (FullPartName "Resistor_Array.Normal")
+      (LibraryName
+         "C:\USERS\NXF42529\DOCUMENTS\CADENCE_LIB\ORCADCIS\SYMBOLS\FCL_RESISTOR.OLB")
+      (DeviceIndex "0"))
+    (CONN_HDR_10X1
+      (FullPartName "CONN_HDR_10X1.Normal")
+      (LibraryName
+         "C:\USERS\NXF42529\DOCUMENTS\CADENCE_LIB\ORCADCIS\SYMBOLS\FCL_CONNECTOR.OLB")
+      (DeviceIndex "0"))
+    (MOSFET_N
+      (FullPartName "MOSFET_N.Normal")
+      (LibraryName
+         "C:\USERS\NXF42529\DOCUMENTS\CADENCE_LIB\ORCADCIS\SYMBOLS\FCL_SEMICONDUCTOR.OLB")
+      (DeviceIndex "0"))
+    ("MICRO CARD1"
+      (FullPartName "MICRO CARD1.Normal")
+      (LibraryName
+         "C:\USERS\NXF42529\DOCUMENTS\CADENCE_LIB\ORCADCIS\SYMBOLS\LIBRARY2.OLB")
+      (DeviceIndex "0"))
+    ("MICRO CARD"
+      (FullPartName "MICRO CARD.Normal")
+      (LibraryName
+         "C:\USERS\NXF42529\DOCUMENTS\CADENCE_LIB\ORCADCIS\SYMBOLS\LIBRARY2.OLB")
+      (DeviceIndex "0"))
+    (CONN_SDCARD_1X13_F_DM3B
+      (FullPartName "CONN_SDCARD_1X13_F_DM3B.Normal")
+      (LibraryName
+         "C:\USERS\NXF42529\DOCUMENTS\CADENCE_LIB\ORCADCIS\SYMBOLS\FCL_CONNECTOR2.OLB")
+      (DeviceIndex "0"))
+    (XC2S50_PQ208
+      (FullPartName "XC2S50_PQ208AA.Normal")
+      (LibraryName
+         "C:\USERS\NXF42529\DOCUMENTS\CADENCE_LIB\ORCADCIS\SYMBOLS\FCL_IC.OLB")
+      (DeviceIndex "0"))
+    (LT1615A
+      (FullPartName "LT1615A.Normal")
+      (LibraryName
+         "C:\USERS\NXF42529\DOCUMENTS\CADENCE_LIB\ORCADCIS\SYMBOLS\FCL_IC.OLB")
+      (DeviceIndex "0"))
+    (LED
+      (FullPartName "LED.Normal")
+      (LibraryName
+         "C:\USERS\NXF42529\DOCUMENTS\CADENCE_LIB\ORCADCIS\SYMBOLS\FCL_IC.OLB")
+      (DeviceIndex "0"))
+    (IMX6_BGA_196P
+      (FullPartName "IMX6_BGA_196PF.Normal")
+      (LibraryName
+         "C:\USERS\NXF42529\DOCUMENTS\CADENCE_LIB\ORCADCIS\SYMBOLS\LIBRARY2.OLB")
+      (DeviceIndex "5"))
+    (LISY300AL
+      (FullPartName "LISY300AL.Normal")
+      (LibraryName
+         "C:\USERS\NXF42529\DOCUMENTS\CADENCE_LIB\ORCADCIS\SYMBOLS\FCL_IC4.OLB")
+      (DeviceIndex "0"))
+    (CBTL04GP043_BGA_28P
+      (FullPartName "CBTL04GP043_BGA_28P.Normal")
+      (LibraryName
+         "C:\USERS\NXF42529\DOCUMENTS\CADENCE_LIB\ORCADCIS\SYMBOLS\FCL_IC4.OLB")
+      (DeviceIndex "0"))
+    (CONN_HDR_2X1
+      (FullPartName "CONN_HDR_2X1.Normal")
+      (LibraryName
+         "C:\USERS\NXF42529\DOCUMENTS\CADENCE_LIB\ORCADCIS\SYMBOLS\FCL_CONNECTOR.OLB")
+      (DeviceIndex "0"))
+    (CON_2P
+      (FullPartName "CON_2P.Normal")
+      (LibraryName
+         "C:\USERS\NXF42529\DOCUMENTS\CADENCE_LIB\ORCADCIS\SYMBOLS\FCL_CONNECTOR2.OLB")
+      (DeviceIndex "0"))
+    (DUALDIODE_CC_SOT23_SHTKY
+      (FullPartName "DUALDIODE_CC_SOT23_SHTKY.Normal")
+      (LibraryName
+         "C:\USERS\NXF42529\DOCUMENTS\CADENCE_LIB\ORCADCIS\SYMBOLS\FCL_SEMICONDUCTOR.OLB")
+      (DeviceIndex "0"))
+    (LED_CL421
+      (FullPartName "LED_CL421.Normal")
+      (LibraryName
+         "C:\USERS\NXF42529\DOCUMENTS\CADENCE_LIB\ORCADCIS\SYMBOLS\FCL_OPTICAL.OLB")
+      (DeviceIndex "0"))
+    (LED_TRICOLOR_RGB
+      (FullPartName "LED_TRICOLOR_RGB.Normal")
+      (LibraryName
+         "C:\USERS\NXF42529\DOCUMENTS\CADENCE_LIB\ORCADCIS\SYMBOLS\FCL_OPTICAL.OLB")
+      (DeviceIndex "0"))
+    (RES
+      (FullPartName "RES.Normal")
+      (LibraryName
+         "C:\USERS\NXF42529\DOCUMENTS\CADENCE_LIB\ORCADCIS\SYMBOLS\FCL_RESISTOR.OLB")
+      (DeviceIndex "0"))
+    (CONN_HDR_6X1
+      (FullPartName "CONN_HDR_6X1.Normal")
+      (LibraryName
+         "C:\USERS\NXF42529\DOCUMENTS\CADENCE_LIB\ORCADCIS\SYMBOLS\FCL_CONNECTOR.OLB")
+      (DeviceIndex "0"))
+    (SPB0503
+      (FullPartName "SPB0503.Normal")
+      (LibraryName
+         "C:\USERS\NXF42529\DOCUMENTS\CADENCE_LIB\ORCADCIS\SYMBOLS\FCL_SEMICONDUCTOR.OLB")
+      (DeviceIndex "0"))
+    (LM1117_FXD
+      (FullPartName "LM1117_FXD.Normal")
+      (LibraryName
+         "C:\USERS\NXF42529\DOCUMENTS\CADENCE_LIB\ORCADCIS\SYMBOLS\FCL_IC2.OLB")
+      (DeviceIndex "0"))
+    (CRYSTAL
+      (FullPartName "CRYSTAL.Normal")
+      (LibraryName
+         "C:\USERS\NXF42529\DOCUMENTS\CADENCE_LIB\ORCADCIS\SYMBOLS\FCL_XTAL_OSC.OLB")
+      (DeviceIndex "0")))
+  (MPSSessionName "nxf43161")
+  (LastUsedLibraryBrowseDirectory
+     "C:\Users\NXF42529\Documents\Cadence_Lib\OrcadCIS\SYMBOLS")
+  (GlobalState
+    (FileView
+      (Path "Design Resources")
+      (Path "Design Resources" ".\openmv-rt.dsn")
+      (Path "Design Resources" ".\openmv-rt.dsn" "SCHEMATIC1")
+      (Path "Outputs")
+      (Select "Design Resources" ".\openmv-rt.dsn"))
+    (HierarchyView)
+    (Doc
+      (Type "COrCapturePMDoc")
+      (Frame
+        (Placement "44 0 1 -1 -1 -1 -1 0 250 0 506"))
+      (Tab 0)))
+  (ISPCBBASICLICENSE "false"))

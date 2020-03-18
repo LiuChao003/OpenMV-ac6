@@ -1,0 +1,6 @@
+附件中的文件说明如下：  
+154843-OpenMV-RT_pcb.zip       PCB源文件
+154843-OpenMV-RT_cam.zip      光绘文件，给PCB板厂制板用
+154843-OpenMV-RT_asm.zip      装配文件，给焊接厂制作工艺文件用
+154843-OpenMV-RT_smd.zip      钢网文件，给钢网厂制钢网用(已包含坐标文件）
+154843-OpenMV-RT_dxf.zip        结构文件，确认结构用

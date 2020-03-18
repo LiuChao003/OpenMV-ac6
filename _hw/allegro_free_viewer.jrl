@@ -1,0 +1,25 @@
+\t (00:00:02) allegro_free_viewer 17.2 S015 Windows SPB 64-bit Edition
+\t (00:00:02)     Journal start - Sat Oct 20 16:38:14 2018
+\t (00:00:02)         Host=DESKTOP-3UIMMQV User=hp Pid=77960 CPUs=8
+\t (00:00:02) CmdLine= C:\Program Files (x86)\Cadence Design Systems\17.2\tools\bin\allegro_free_viewer.exe
+\t (00:00:02) 
+\t (00:00:02) Starting new design...
+\i (00:00:03) trapsize 579
+\i (00:00:03) trapsize 569
+\i (00:00:03) trapsize 579
+\i (00:00:03) trapsize 877
+\i (00:00:13) trapsize 704
+\i (00:00:15) zoom out 1 
+\i (00:00:15) setwindow pcb
+\i (00:00:15) zoom out 21450.7 9112.7
+\i (00:00:16) trapsize 704
+\i (00:00:16) zoom out 1 
+\i (00:00:16) setwindow pcb
+\i (00:00:16) zoom out 21450.7 9112.7
+\i (00:00:16) trapsize 704
+\i (00:00:18) setwindow form.vf_vis
+\i (00:00:18) FORM vf_vis all_etch_visible NO 
+\i (00:00:18) FORM vf_vis all_etch_visible YES 
+\i (00:57:23) setwindow pcb
+\i (00:57:23) exit 
+\t (00:57:24)     Journal end - Sat Oct 20 17:35:36 2018

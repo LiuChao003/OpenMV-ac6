@@ -1,0 +1,93 @@
+\t (00:00:02) allegro_free_viewer 17.2 S015 Windows SPB 64-bit Edition
+\t (00:00:02)     Journal start - Sat Jul 28 21:31:06 2018
+\t (00:00:02)         Host=DESKTOP-3UIMMQV User=hp Pid=15960 CPUs=8
+\t (00:00:02) CmdLine= C:\Program Files (x86)\Cadence Design Systems\17.2\tools\bin\allegro_free_viewer.exe
+\t (00:00:02) 
+\t (00:00:02) Starting new design...
+\i (00:00:04) trapsize 295
+\i (00:00:04) trapsize 293
+\i (00:00:05) trapsize 295
+\i (00:00:05) trapsize 434
+\i (00:00:07) trapsize 877
+\i (00:00:18) opencd D:/RTOS_MW/mpyrt_omv/_hw/154843-OpenMV-RT_1629.brd 
+\t (00:00:18) Opening existing design...
+\i (00:00:18) trapsize 4564
+\d (00:00:18) Design opened: D:/RTOS_MW/mpyrt_omv/_hw/154843-OpenMV-RT_1629.brd
+\i (00:00:19) zoom out 1 
+\i (00:00:19) setwindow pcb
+\i (00:00:19) zoom out 750.234 798.914
+\i (00:00:19) trapsize 9128
+\i (00:00:20) zoom out 1 
+\i (00:00:20) setwindow pcb
+\i (00:00:20) zoom out 750.235 798.913
+\i (00:00:20) trapsize 18256
+\i (00:00:22) zoom out 1 
+\i (00:00:22) setwindow pcb
+\i (00:00:22) zoom out 823.256 587.149
+\i (00:00:22) trapsize 36511
+\i (00:00:23) zoom in 1 
+\i (00:00:23) setwindow pcb
+\i (00:00:23) zoom in 823.256 1835.830
+\i (00:00:23) trapsize 18256
+\i (00:00:28) setwindow form.vf_vis
+\i (00:00:28) FORM vf_vis 1 all_colorvisible YES 
+\i (00:00:30) FORM vf_vis 4 all_colorvisible YES 
+\i (00:00:33) setwindow pcb
+\i (00:00:33) zoom in 1 
+\i (00:00:33) setwindow pcb
+\i (00:00:33) zoom in 461.796 1781.064
+\i (00:00:33) trapsize 9128
+\i (00:00:34) zoom out 1 
+\i (00:00:34) setwindow pcb
+\i (00:00:34) zoom out 492.830 1753.680
+\i (00:00:34) trapsize 18256
+\i (00:05:01) zoom in 1 
+\i (00:05:01) setwindow pcb
+\i (00:05:01) zoom in 416.156 1457.941
+\i (00:05:02) trapsize 9128
+\i (00:05:02) zoom in 1 
+\i (00:05:02) setwindow pcb
+\i (00:05:02) zoom in 434.412 1439.686
+\i (00:05:02) trapsize 4564
+\i (00:05:02) zoom in 1 
+\i (00:05:02) setwindow pcb
+\i (00:05:02) zoom in 565.853 1376.705
+\i (00:05:02) trapsize 2282
+\i (00:05:02) zoom in 1 
+\i (00:05:02) setwindow pcb
+\i (00:05:02) zoom in 565.853 1376.705
+\i (00:05:02) trapsize 1141
+\i (00:05:03) zoom out 1 
+\i (00:05:03) setwindow pcb
+\i (00:05:03) zoom out 567.451 1375.792
+\i (00:05:03) trapsize 2282
+\i (00:05:03) zoom out 1 
+\i (00:05:03) setwindow pcb
+\i (00:05:03) zoom out 567.450 1375.793
+\i (00:05:03) trapsize 4564
+\i (00:05:03) zoom out 1 
+\i (00:05:03) setwindow pcb
+\i (00:05:03) zoom out 569.276 1373.967
+\i (00:05:03) trapsize 9128
+\i (00:05:03) zoom out 1 
+\i (00:05:03) setwindow pcb
+\i (00:05:03) zoom out 571.101 1372.142
+\i (00:05:03) trapsize 18256
+\i (00:05:03) zoom out 1 
+\i (00:05:03) setwindow pcb
+\i (00:05:03) zoom out 571.101 1372.142
+\i (00:05:03) trapsize 36511
+\i (00:05:03) zoom in 1 
+\i (00:05:03) setwindow pcb
+\i (00:05:03) zoom in 571.100 1372.142
+\i (00:05:03) trapsize 18256
+\i (00:05:04) zoom in 1 
+\i (00:05:04) setwindow pcb
+\i (00:05:04) zoom in 571.100 1372.142
+\i (00:05:04) trapsize 9128
+\i (00:05:04) zoom out 1 
+\i (00:05:04) setwindow pcb
+\i (00:05:04) zoom out 571.100 1370.316
+\i (00:05:04) trapsize 18256
+\i (00:07:52) exit 
+\t (00:07:53)     Journal end - Sat Jul 28 21:38:57 2018
