@@ -27,7 +27,7 @@
 #include <stdio.h>
 #include <stdint.h>
 #include <string.h>
-#if defined(__CC_ARM) || defined(__ICCARM__)
+#if defined(__CC_ARM) || defined(__ICCARM__)|1
 #include "mpconfig.h"
 #endif
 #include "py/mperrno.h"

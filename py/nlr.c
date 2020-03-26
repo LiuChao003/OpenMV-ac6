@@ -37,15 +37,15 @@ __attribute__((used)) unsigned int nlr_push_tail(nlr_buf_t *nlr);
 #endif
 #endif
 
-unsigned int nlr_push_tail(nlr_buf_t *nlr) {
-    nlr_buf_t **top = &MP_STATE_THREAD(nlr_top);
-    nlr->prev = *top;
-//    MP_NLR_SAVE_PYSTACK(nlr);
-    *top = nlr;
-    return 0; // normal return
-}
+//unsigned int nlr_push_tail(nlr_buf_t *nlr) {
+//    nlr_buf_t **top = &MP_STATE_THREAD(nlr_top);
+//    nlr->prev = *top;
+////    MP_NLR_SAVE_PYSTACK(nlr);
+//    *top = nlr;
+//    return 0; // normal return
+//}
 
-void nlr_pop(void) {
-    nlr_buf_t **top = &MP_STATE_THREAD(nlr_top);
-    *top = (*top)->prev;
-}
+//void nlr_pop(void) {
+//    nlr_buf_t **top = &MP_STATE_THREAD(nlr_top);
+//    *top = (*top)->prev;
+//}

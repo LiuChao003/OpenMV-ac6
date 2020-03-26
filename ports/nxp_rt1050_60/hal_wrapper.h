@@ -19,7 +19,7 @@ typedef enum
 #define UNUSED(x) ((void)(x))
 
 
-#if !defined(__CC_ARM) && defined ( __GNUC__ )
+#if !defined(__CC_ARM) && defined ( __GNUC__ )&0
   #ifndef __weak
     #define __weak   __attribute__((weak))
   #endif /* __weak */
@@ -30,7 +30,7 @@ typedef enum
 
 
 /* Macro to get variable aligned on 4-bytes, for __ICCARM__ the directive "#pragma data_alignment=4" must be used instead */
-#if !defined(__CC_ARM) && defined ( __GNUC__ )       /* GNU Compiler */
+#if !defined(__CC_ARM) && defined ( __GNUC__ ) &0      /* GNU Compiler */
   #ifndef __ALIGN_END
     #define __ALIGN_END    __attribute__ ((aligned (4)))
   #endif /* __ALIGN_END */
@@ -42,7 +42,7 @@ typedef enum
     #define __ALIGN_END
   #endif /* __ALIGN_END */
   #ifndef __ALIGN_BEGIN      
-    #if defined   (__CC_ARM)      /* ARM Compiler */
+    #if defined   (__CC_ARM) |1     /* ARM Compiler */
       #define __ALIGN_BEGIN    __align(4)  
     #elif defined (__ICCARM__)    /* IAR Compiler */
       #define __ALIGN_BEGIN 

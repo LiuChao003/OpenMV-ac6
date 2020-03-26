@@ -113,7 +113,7 @@ void pendsv_nlr_jump_hard(void *o) {
 }
 
 
-#if defined (__CC_ARM)
+#if defined (__CC_ARM) 
 __asm void PendSV_Handler(void) {
     // re-jig the stack so that when we return from this interrupt handler
     // it returns instead to nlr_jump with argument pendsv_object

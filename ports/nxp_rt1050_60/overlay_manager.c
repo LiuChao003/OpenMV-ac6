@@ -1,8 +1,6 @@
 #include "overlay_manager.h"
 
-#ifdef __CC_ARM
-
-
+#if defined(__CC_ARM )|| defined(__clang__) || defined(__ARMCC_VERSION) 
 extern uint32_t Load$$OVERLAY_YUV_TAB$$Base;
 extern uint32_t Load$$OVERLAY_YUV_TAB$$Length;
 extern uint32_t Image$$OVERLAY_YUV_TAB$$Base;
@@ -99,6 +97,7 @@ __asm void OverlayMemCpy(void *pvDst, const void*pvSrc, uint32_t cb) {
 	pop		{r4-r10, pc}
 	
 }
+#endif
 #if 0
 int OverlaySwitch(uint8_t ovlyNdx) {return 0;}
 #else
@@ -135,47 +134,6 @@ int OverlaySwitch(uint8_t ovlyNdx) {
 Cleanup:	
 	return ovlyNdxBkup;
 }
-#endif
-#else
-int OverlaySwitch(uint8_t ovlyNdx) {return 0;}
-
-#if 0
-int OverlaySwitch(uint8_t ovlyNdx) {
-	if (s_curOvly == ovlyNdx)
-		return ovlyNdx;
-	uint8_t ovlyNdxBkup = ovlyNdx;
-	const uint32_t *pSrc;
-	uint32_t *pDst;
-	uint32_t cb;
-	
-	switch (ovlyNdx) {
-		OVERLAY_CASE(YUV_TAB)
-		OVERLAY_CASE(LAB_TAB)
-		OVERLAY_CASE(HAAR)
-		#ifdef XIP_EXTERNAL_FLASH
-		OVERLAY_CASE(FLASHPGM)
-		#endif
-	default:
-		return -1L;
-	}
-	pDst = &_overlay_dtcm_base;
-	s_curOvly = ovlyNdx;
-	memcpy(pDst, pSrc, cb);		
-	// >>> copy code
-	switch (ovlyNdx) {
-		OVERLAY_CASE(CODE_JPEG)
-		OVERLAY_CASE(CODE_BLOB)
-	default:
-		return -1L;
-	}
-	
-	pDst = &_overlay_dtcm_base;
-	memcpy(pDst, pSrc, cb);	
-	// <<<
-	
-	return ovlyNdxBkup;
-}
-#endif
 #endif
 int OverlaySetToDefault(void) {
 	return OverlaySwitch(OVLY_YUV_TAB);

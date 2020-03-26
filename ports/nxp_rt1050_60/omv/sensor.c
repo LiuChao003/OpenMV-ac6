@@ -483,7 +483,7 @@ typedef union {
 }YUV64bit_t;
 
 
-#ifdef __CC_ARM
+#ifndef __CC_ARM
 #define RAM_CODE __attribute__((section(".ram_code")))
 #else
 #define RAM_CODE

@@ -71,7 +71,7 @@ extern int DbgConsole_Printf(const char *fmt_s, ...);
 #undef usb_echo
 #define usb_echo(...) mp_printf(MP_PYTHON_PRINTER, __VA_ARGS__)
 
-#if defined(__ICCARM__)
+#if defined(__ICCARM__) &0
 
 #ifndef STRUCT_PACKED
 #define STRUCT_PACKED __packed
@@ -81,7 +81,7 @@ extern int DbgConsole_Printf(const char *fmt_s, ...);
 #define STRUCT_UNPACKED
 #endif
 
-#elif defined(__GNUC__)
+#elif defined(__GNUC__)&0
 
 #ifndef STRUCT_PACKED
 #define STRUCT_PACKED
@@ -91,7 +91,7 @@ extern int DbgConsole_Printf(const char *fmt_s, ...);
 #define STRUCT_UNPACKED __attribute__((__packed__))
 #endif
 
-#elif defined(__CC_ARM)
+#elif defined(__CC_ARM) ||1
 
 #ifndef STRUCT_PACKED
 #define STRUCT_PACKED _Pragma("pack(1U)")
@@ -334,7 +334,7 @@ _Pragma("diag_suppress=Pm120")
             _Pragma("diag_default=Pm120")
 #define USB_LINK_DMA_NONINIT_DATA _Pragma("location = \"m_usb_dma_noninit_data\"")
 #define USB_LINK_NONCACHE_NONINIT_DATA _Pragma("location = \"NonCacheable\"")
-#elif defined(__CC_ARM)
+#elif defined(__CC_ARM)||1
 
 #define USB_WEAK_VAR __attribute__((weak))
 #define USB_WEAK_FUN __weak

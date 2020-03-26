@@ -25,9 +25,9 @@
  */
 
 #include "py/mpstate.h"
+#include "py/nlr.h"
 
-#define MICROPY_NLR_THUMB   1
-#if MICROPY_NLR_THUMB
+#if (!defined(MICROPY_NLR_SETJMP) || !MICROPY_NLR_SETJMP) && (defined(__thumb2__) || defined(__thumb__) || defined(__arm__))
 
 #undef nlr_push
 
@@ -36,16 +36,76 @@
 //
 // For reference, arm/thumb callee save regs are:
 //      r4-r11, r13=sp
+//	__asm volatile (		
+//	    " .global	SysTick_C_Handler   \n" 	
+//		" .align 8   \n" 		
+//		" tst lr, #4	\n" 		// Test Bit 3 to see which stack pointer we should use.   __asm(".global symbol\n\t");
+//		" ite eq		\n" 		// Tell the assembler that the nest 2 instructions are if-then-else
+//		" mrseq r0, msp \n" 		// Make R0 point to main stack pointer
+//		" mrsne r0, psp \n" 		// Make R0 point to process stack pointer
+//		" push	{r4-r11, lr} \n"
+//		" mov	r1, sp	\n"
+//		" bl SysTick_C_Handler \n" // Off to C land
+//		" pop  {r4-r11, lr}  \n"
+//		" bx   lr  \n"
+//	);
 
+#ifdef __CC_ARM
+
+ unsigned int nlr_push(nlr_buf_t *nlr) {
+	import nlr_push_tail
+	PRESERVE8 {TRUE}
+    str    r4, [r0, #12]        // store r4 into nlr_buf
+    str    r5, [r0, #16]        // store r5 into nlr_buf
+    str    r6, [r0, #20]        // store r6 into nlr_buf
+    str    r7, [r0, #24]        // store r7 into nlr_buf
+#if defined(__ARM_ARCH_6M__)
+    mov    r1, r8              
+    str    r1, [r0, #28]        // store r8 into nlr_buf
+    mov    r1, r9              
+    str    r1, [r0, #32]        // store r9 into nlr_buf
+    mov    r1, r10             
+    str    r1, [r0, #36]        // store r10 into nlr_buf
+    mov    r1, r11             
+    str    r1, [r0, #40]        // store r11 into nlr_buf
+    mov    r1, r13             
+    str    r1, [r0, #44]        // store r13=sp into nlr_buf
+    mov    r1, lr              
+    str    r1, [r0, #8]         // store lr into nlr_buf
+#else
+    str    r8, [r0, #28]        // store r8 into nlr_buf
+    str    r9, [r0, #32]        // store r9 into nlr_buf
+    str    r10, [r0, #36]       // store r10 into nlr_buf
+    str    r11, [r0, #40]       // store r11 into nlr_buf
+    str    r13, [r0, #44]       // store r13=sp into nlr_buf
+    str    lr, [r0, #8]         // store lr into nlr_buf
+#endif
+
+#if defined(__ARM_ARCH_6M__)
+    ldr    r1, nlr_push_tail_var \n
+    bx     r1                  // do the rest in C
+    ALIGN 2
+nlr_push_tail_var 
+	DCW word nlr_push_tail
+#else
+	push	{lr}
+    bl      nlr_push_tail       // do the rest in C
+	pop		{pc}
+#endif
+}
+
+#else
 __attribute__((naked)) unsigned int nlr_push(nlr_buf_t *nlr) {
 
     __asm volatile (
+    " .global	nlr_push_tail   \n" 	
+	" .align 8   \n" 
     "str    r4, [r0, #12]       \n" // store r4 into nlr_buf
     "str    r5, [r0, #16]       \n" // store r5 into nlr_buf
     "str    r6, [r0, #20]       \n" // store r6 into nlr_buf
     "str    r7, [r0, #24]       \n" // store r7 into nlr_buf
 
-#if !defined(__thumb2__)
+#if defined(__ARM_ARCH_6M__)
     "mov    r1, r8              \n"
     "str    r1, [r0, #28]       \n" // store r8 into nlr_buf
     "mov    r1, r9              \n"
@@ -64,46 +124,89 @@ __attribute__((naked)) unsigned int nlr_push(nlr_buf_t *nlr) {
     "str    r10, [r0, #36]      \n" // store r10 into nlr_buf
     "str    r11, [r0, #40]      \n" // store r11 into nlr_buf
     "str    r13, [r0, #44]      \n" // store r13=sp into nlr_buf
-    #if MICROPY_NLR_NUM_REGS == 16
-    "vstr   d8, [r0, #48]       \n" // store s16-s17 into nlr_buf
-    "vstr   d9, [r0, #56]       \n" // store s18-s19 into nlr_buf
-    "vstr   d10, [r0, #64]      \n" // store s20-s21 into nlr_buf
-    #endif
     "str    lr, [r0, #8]        \n" // store lr into nlr_buf
 #endif
 
-#if !defined(__thumb2__)
+#if defined(__ARM_ARCH_6M__)
     "ldr    r1, nlr_push_tail_var \n"
     "bx     r1                  \n" // do the rest in C
     ".align 2                   \n"
     "nlr_push_tail_var: .word nlr_push_tail \n"
 #else
-    #if defined(__APPLE__) || defined(__MACH__)
-    "b      _nlr_push_tail      \n" // do the rest in C
-    #else
+	"mov	r1,  lr		\n"
     "b      nlr_push_tail       \n" // do the rest in C
-    #endif
 #endif
     );
 
-    #if !defined(__clang__) && defined(__GNUC__) && (__GNUC__ < 4 || (__GNUC__ == 4 && __GNUC_MINOR__ < 8))
-    // Older versions of gcc give an error when naked functions don't return a value
-    // Additionally exclude Clang as it also defines __GNUC__ but doesn't need this statement
-    return 0;
-    #endif
+//    return 0; // needed to silence compiler warning
+}
+#endif
+
+#ifdef __CC_ARM
+unsigned int nlr_push_tail(nlr_buf_t *nlr) {
+    nlr_buf_t **top = &MP_STATE_THREAD(nlr_top);
+    nlr->prev = *top;
+    *top = nlr;
+    return 0; // normal return
+}
+#else
+__attribute__((used)) unsigned int nlr_push_tail(nlr_buf_t *nlr, uint32_t adrFrom) {
+    nlr_buf_t **top = &MP_STATE_THREAD(nlr_top);
+    nlr->prev = *top;
+    *top = nlr;
+    return 0; // normal return
+}
+#endif
+
+void nlr_pop(void) {
+    nlr_buf_t **top = &MP_STATE_THREAD(nlr_top);
+    *top = (*top)->prev;
 }
 
-NORETURN void nlr_jump(void *val) {
-//    MP_NLR_JUMP_HEAD(val, top);
+#ifdef __CC_ARM
+unsigned int nlr_jump_asm(nlr_buf_t *nlr)
+{
+//    ldr    r4, [r0, #12]        // load r4 from nlr_buf
+//    ldr    r5, [r0, #16]        // load r5 from nlr_buf
+//    ldr    r6, [r0, #20]        // load r6 from nlr_buf
+//    ldr    r7, [r0, #24]        // load r7 from nlr_buf
 
+#if defined(__ARM_ARCH_6M__)
+    ldr    r1, [r0, #28]        // load r8 from nlr_buf
+    mov    r8, r1              
+    ldr    r1, [r0, #32]        // load r9 from nlr_buf
+    mov    r9, r1              
+    ldr    r1, [r0, #36]        // load r10 from nlr_buf
+    mov    r10, r1             
+    ldr    r1, [r0, #40]        // load r11 from nlr_buf
+    mov    r11, r1             
+    ldr    r1, [r0, #44]        // load r13=sp from nlr_buf
+    mov    r13, r1             
+    ldr    r1, [r0, #8]         // load lr from nlr_buf
+    mov    lr, r1              
+#else
+//    ldr    r8, [r0, #28]        // load r8 from nlr_buf
+//    ldr    r9, [r0, #32]        // load r9 from nlr_buf
+//    ldr    r10, [r0, #36]       // load r10 from nlr_buf
+//    ldr    r11, [r0, #40]       // load r11 from nlr_buf
+//    ldr    r13, [r0, #44]       // load r13=sp from nlr_buf
+//    ldr    lr, [r0, #8]         // load lr from nlr_buf
+#endif
+//	mov	   r0,	#0x01000000
+//	msr	   xpsr, r0
+//    movs   r0, #1               // return 1, non-local return
+//    bx     lr                   // return	
+}
+#else
+__attribute__((naked)) unsigned int nlr_jump_asm(nlr_buf_t *nlr)
+{
     __asm volatile (
-//    "mov    r0, %0              \n" // r0 points to nlr_buf
     "ldr    r4, [r0, #12]       \n" // load r4 from nlr_buf
     "ldr    r5, [r0, #16]       \n" // load r5 from nlr_buf
     "ldr    r6, [r0, #20]       \n" // load r6 from nlr_buf
     "ldr    r7, [r0, #24]       \n" // load r7 from nlr_buf
 
-#if !defined(__thumb2__)
+#if defined(__ARM_ARCH_6M__)
     "ldr    r1, [r0, #28]       \n" // load r8 from nlr_buf
     "mov    r8, r1              \n"
     "ldr    r1, [r0, #32]       \n" // load r9 from nlr_buf
@@ -122,28 +225,26 @@ NORETURN void nlr_jump(void *val) {
     "ldr    r10, [r0, #36]      \n" // load r10 from nlr_buf
     "ldr    r11, [r0, #40]      \n" // load r11 from nlr_buf
     "ldr    r13, [r0, #44]      \n" // load r13=sp from nlr_buf
-    #if MICROPY_NLR_NUM_REGS == 16
-    "vldr   d8, [r0, #48]       \n" // load s16-s17 from nlr_buf
-    "vldr   d9, [r0, #56]       \n" // load s18-s19 from nlr_buf
-    "vldr   d10, [r0, #64]      \n" // load s20-s21 from nlr_buf
-    #endif
     "ldr    lr, [r0, #8]        \n" // load lr from nlr_buf
 #endif
+	"mov	r0, #0x01000000		\n"
+	"msr	xpsr, r0			\n"
     "movs   r0, #1              \n" // return 1, non-local return
-    "bx     lr                  \n" // return
-    :                               // output operands
-//    : "r"(top)                      // input operands
-    :                               // clobbered registers
-    );
-
-//    MP_UNREACHABLE
-
-
-    #if defined(__GNUC__)
-    __builtin_unreachable();
-    #else
-    for (;;); // needed to silence compiler warning
-    #endif
+    "bx     lr                  \n" // return                 // return	
+	);
 }
 
-#endif // MICROPY_NLR_THUMB
+#endif
+NORETURN void nlr_jump(void *val) {
+    nlr_buf_t **top_ptr = &MP_STATE_THREAD(nlr_top);
+    nlr_buf_t *top = *top_ptr;
+    if (top == NULL) {
+        nlr_jump_fail(val);
+    }
+    top->ret_val = val;
+    *top_ptr = top->prev;
+	nlr_jump_asm(top);
+	for (;;); // needed to silence compiler warning
+}
+
+#endif // (!defined(MICROPY_NLR_SETJMP) || !MICROPY_NLR_SETJMP) && (defined(__thumb2__) || defined(__thumb__) || defined(__arm__))

@@ -407,7 +407,6 @@ zero_itcm2
 				; <<<	
 				ENDP
 
-
 TestCchBug		PROC
 				EXPORT	TestCchBug
 				LDR		R0,	=0x20200000	;The MPU has been programmed to set this address as Write-Through

@@ -154,7 +154,7 @@ extern float scalbf __P((float, float));
 extern float significandf __P((float));
 
 // rocky
-#if defined(__CC_ARM) || defined(__ICCARM__)
+#if defined(__CC_ARM) || defined(__ICCARM__)|1
 typedef int __int32_t;
 typedef unsigned int __uint32_t;
 #endif

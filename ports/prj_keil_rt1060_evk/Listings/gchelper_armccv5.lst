@@ -71,12 +71,12 @@ ARM Macro Assembler    Page 2
 
                        _get_regs_and_clean_stack
    55 00000064                 END
-Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M7.fp.sp --depen
-d=.\objects\gchelper_armccv5.d -o.\objects\gchelper_armccv5.o -I.\RTE\_qspi_106
-2_sdram -IC:\Keil_v5\ARM\PACK\NXP\iMXRT_DFP\1.0.3\Device\Include -IC:\Keil_v5\A
-RM\CMSIS\Include --predefine="__UVISION_VERSION SETA 526" --predefine="_RTE_ SE
-TA 1" --predefine="MIMXRT1052 SETA 1" --predefine="XIP_EXTERNAL_FLASH SETA 1" -
--list=.\listings\gchelper_armccv5.lst ..\nxp_rt1050_60\gchelper_armccv5.S
+Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M7.fp.dp --depen
+d=.\objects\gchelper_armccv5.d -o.\objects\gchelper_armccv5.o -I.\RTE\_debug_sd
+ram_ac6 -IC:\Keil_v5\ARM\PACK\NXP\MIMXRT1062_DFP\11.0.0 -IC:\Keil_v5\ARM\CMSIS\
+Include --predefine="__UVISION_VERSION SETA 529" --predefine="CPU_MIMXRT1062DVL
+6A SETA 1" --predefine="XIP_EXTERNAL_FLASH SETA 1" --list=.\listings\gchelper_a
+rmccv5.lst ..\nxp_rt1050_60\gchelper_armccv5.S
 
 
 
@@ -124,4 +124,4 @@ Symbol: gc_helper_get_regs_and_sp
       At line 6 in file ..\nxp_rt1050_60\gchelper_armccv5.S
 Comment: gc_helper_get_regs_and_sp used once
 5 symbols
-340 symbols in table
+339 symbols in table

@@ -4,7 +4,7 @@
  */
 #include "py_helper.h"
 #include "py_assert.h"
-#ifdef __CC_ARM
+#ifndef __CC_ARM
 __WEAK bool rectangle_overlap(rectangle_t *ptr0, rectangle_t *ptr1)
 {
     int x0 = ptr0->x;

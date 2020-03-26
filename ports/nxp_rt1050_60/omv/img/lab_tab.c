@@ -1,6 +1,6 @@
 #include <stdint.h>
 #include "board.h"
-#ifdef __CC_ARM
+#ifndef __CC_ARM
 #define LAB_TAB	__attribute__((section(".lab_tab")))
 #else
 #define LAB_TAB

@@ -703,7 +703,7 @@ int main(void) {
          - Global MSP (MCU Support Package) initialization
        */
     HAL_Init();
-	TestCacheBug();
+//	TestCacheBug();
     #if defined(MICROPY_BOARD_EARLY_INIT)
     MICROPY_BOARD_EARLY_INIT();
     #endif
@@ -786,7 +786,7 @@ soft_reset:
     mp_thread_init();
     #endif
     // GC init
-#if defined(__CC_ARM) || defined(__ICCARM__)
+#if defined(__CC_ARM) || defined(__ICCARM__)  ||1
     // Stack limit should be less than real stack size, so we have a chance
     // to recover from limit hit.  (Limit is measured in bytes.)
     // Note: stack control relies on main thread being initialised above

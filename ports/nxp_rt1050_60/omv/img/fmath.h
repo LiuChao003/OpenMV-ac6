@@ -19,9 +19,13 @@ static inline float fast_sqrtf(float x)
 {  
 //	__asm volatile (
 //		
-////	"VSQRT.F32	x,	x    \n"
+////	"VSQRT.F32	x,	x"
+//	"vsqrt.f32	x,	x"
 //		
 //	);
+	
+ __asm volatile( "vsqrt.f32 %0, %0"
+                       : "+t"(x):);	
 
     return x;
 	
@@ -52,7 +56,8 @@ static int fast_roundf(float x)
 	"vcvtr.s32.f32	s0, s0     \n"
 	"vmov	r0, s0             \n"
 	"bx		lr                 \n"
-//	"ALIGN                     \n"			
+//	"ALIGN                     \n"	
+		" .align   \n" 	
 	);
 }
 
@@ -64,6 +69,7 @@ static int  fast_floorf(float x)
 	"vmov	r0, s0             \n"
 	"bx		lr                 \n"
 //	"ALIGN                     \n"	
+	" .align   \n" 	
 	);
 }
 
@@ -75,6 +81,7 @@ static int fast_ceilf(float x)
 	"vmov	r0, s0             \n"
 	"bx		lr                 \n"
 //	"ALIGN                     \n"	
+	" .align   \n" 	
 	);
 	/*
     float i;

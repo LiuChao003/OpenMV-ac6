@@ -1,4 +1,4 @@
---cpu Cortex-M7.fp.sp
+--cpu Cortex-M7.fp.dp --scatter "./RTE/Device/MIMXRT1062DVL6A/MIMXRT1062xxxxx_ram.scf"
 ".\objects\arm_common_tables.o"
 ".\objects\arm_cos_f32.o"
 ".\objects\arm_cos_q15.o"
@@ -164,7 +164,6 @@
 ".\objects\nlrx64.o"
 ".\objects\nlrx86.o"
 ".\objects\nlrxtensa.o"
-".\objects\nlr.o"
 ".\objects\string0.o"
 ".\objects\ff.o"
 ".\objects\ccsbcs.o"
@@ -257,12 +256,10 @@
 ".\objects\fsl_xbara.o"
 ".\objects\fsl_xbarb.o"
 ".\objects\fsl_csi_camera_adapter.o"
-".\objects\fsl_debug_console.o"
-".\objects\fsl_log.o"
 ".\objects\fsl_str.o"
 ".\objects\fsl_assert.o"
 ".\objects\fsl_shell.o"
-".\objects\fsl_io.o"
+".\objects\fsl_debug_console.o"
 ".\objects\frozen_mpy.o"
 ".\objects\pins_imxrtevk105x.o"
 ".\objects\startup_mimxrt1052.o"
@@ -420,8 +417,11 @@
 ".\objects\h5toc_model_weit.o"
 ".\objects\mfn_main.o"
 ".\objects\mfnstorage.o"
-".\objects\retarget_io.o"
---strict --scatter ".\1060_qspi_sdr.sct"
+".\objects\serial_manager.o"
+".\objects\serial_port_uart.o"
+".\objects\lpuart_adapter.o"
+".\objects\generic_list.o"
+--strict --scatter ".\sdram.sct"
 --any_placement=next_fit --keep=*.o(.boot*) --emit_debug_overlay_relocs --emit_debug_overlay_section --summary_stderr --info summarysizes --map --load_addr_map_info --symbols
 --info sizes --info totals --info unused --info veneers
 --list ".\Listings\mpyrt_flexspi.map" -o .\Objects\mpyrt_flexspi.axf

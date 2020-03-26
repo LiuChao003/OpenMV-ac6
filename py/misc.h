@@ -92,7 +92,7 @@ void *m_realloc(void *ptr, size_t new_num_bytes);
 void *m_realloc_maybe(void *ptr, size_t new_num_bytes, bool allow_move);
 void m_free(void *ptr);
 #endif
-#ifdef __CC_ARM
+#ifndef __CC_ARM
 void m_malloc_fail(size_t num_bytes);
 #else
 NORETURN void m_malloc_fail(size_t num_bytes);

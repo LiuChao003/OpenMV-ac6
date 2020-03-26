@@ -250,7 +250,7 @@ error:
 int imlib_load_cascade(cascade_t *cascade, const char *path)
 {
     // built-in cascade
-    if (strcmp(path, "frontalface") == 0) {
+    if (strcmp(path, "frontalface") == 0 ) {
         cascade->window.w            = frontalface_window_w;
         cascade->window.h            = frontalface_window_h;
         cascade->n_stages            = frontalface_n_stages;

@@ -36,7 +36,7 @@
 /**
  * @brief A few utility functions used by pooling functions
  *
- * 
+ *
  */
 
 static void buffer_scale_back_q15_to_q7(q15_t * buffer, q7_t * target, uint16_t length, uint16_t scale)
@@ -50,20 +50,20 @@ static void buffer_scale_back_q15_to_q7(q15_t * buffer, q7_t * target, uint16_t 
 }
 
 static void compare_and_replace_if_larger_q7(q7_t * base,   // base data
-                                             q7_t * target, // compare target
+                                             const q7_t * target,   // compare target
                                              const uint16_t length  // data length
     )
 {
     q7_t     *pIn = base;
-    q7_t     *pCom = target;
+    const q7_t     *pCom = target;
     union arm_nnword in;
     union arm_nnword com;
     uint16_t  cnt = length >> 2;
 
     while (cnt > 0u)
     {
-        in.word = *__SIMD32(pIn);
-        com.word = *__SIMD32(pCom)++;
+        in.word = arm_nn_read_q7x4((const q7_t*)pIn);
+        com.word = arm_nn_read_q7x4_ia((const q7_t**)&pCom);
 
         // if version
         if (com.bytes[0] > in.bytes[0])
@@ -79,6 +79,18 @@ static void compare_and_replace_if_larger_q7(q7_t * base,   // base data
 
         cnt--;
     }
+
+    cnt = length & 0x3;
+    while (cnt > 0u)
+    {
+      if (*pCom > *pIn)
+      {
+        *pIn = *pCom;
+      }
+      pIn++;
+      pCom++;
+      cnt--;
+    }
 }
 
 static void accumulate_q7_to_q15(q15_t * base, q7_t * target, const uint16_t length)
@@ -91,7 +103,7 @@ static void accumulate_q7_to_q15(q15_t * base, q7_t * target, const uint16_t len
 
     while (cnt > 0u)
     {
-        q31_t     value = *__SIMD32(pV)++;
+        q31_t     value = arm_nn_read_q7x4_ia((const q7_t**)&pV);
         v1 = __SXTB16(__ROR(value, 8));
         v2 = __SXTB16(value);
 #ifndef ARM_MATH_BIG_ENDIAN
@@ -106,10 +118,10 @@ static void accumulate_q7_to_q15(q15_t * base, q7_t * target, const uint16_t len
 
 #endif
 
-        in = *__SIMD32(pCnt);
+        in = arm_nn_read_q15x2(pCnt);
         *__SIMD32(pCnt)++ = __QADD16(vo1, in);
 
-        in = *__SIMD32(pCnt);
+        in = arm_nn_read_q15x2(pCnt);
         *__SIMD32(pCnt)++ = __QADD16(vo2, in);
 
         cnt--;
@@ -142,15 +154,10 @@ static void accumulate_q7_to_q15(q15_t * base, q7_t * target, const uint16_t len
    * @param[in]       padding     padding sizes
    * @param[in]       stride      convolution stride
    * @param[in]       dim_im_out  output tensor dimension
-   * @param[in,out]   bufferA     pointer to buffer space for input
+   * @param[in,out]   bufferA     Not used
    * @param[in,out]   Im_out      pointer to output tensor
-   * @return none.
    *
    * @details
-   *
-   * <b>Buffer size:</b>
-   *
-   * bufferA size:  0
    *
    * The pooling function is implemented as split x-pooling then
    * y-pooling.
@@ -168,7 +175,7 @@ arm_maxpool_q7_HWC(q7_t * Im_in,
                    const uint16_t padding,
                    const uint16_t stride, const uint16_t dim_im_out, q7_t * bufferA, q7_t * Im_out)
 {
-
+    (void)bufferA;
 #if defined (ARM_MATH_DSP)
     /* Run the following code for Cortex-M4 and Cortex-M7 */
 
@@ -253,7 +260,6 @@ arm_maxpool_q7_HWC(q7_t * Im_in,
 
 #else
     /* Run the following code as reference implementation for Cortex-M0 and Cortex-M3 */
-
     int16_t   i_ch_in, i_x, i_y;
     int16_t   k_x, k_y;
 
@@ -297,7 +303,6 @@ arm_maxpool_q7_HWC(q7_t * Im_in,
    * @param[in]       dim_im_out  output tensor dimension
    * @param[in,out]   bufferA     pointer to buffer space for input
    * @param[in,out]   Im_out      pointer to output tensor
-   * @return none.
    *
    * @details
    *
@@ -412,6 +417,7 @@ arm_avepool_q7_HWC(q7_t * Im_in,
 #else
     /* Run the following code as reference implementation for Cortex-M0 and Cortex-M3 */
 
+    (void)bufferA;
     int16_t   i_ch_in, i_x, i_y;
     int16_t   k_x, k_y;
 

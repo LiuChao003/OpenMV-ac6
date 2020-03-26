@@ -199,7 +199,7 @@ typedef bool BOOL_16;
 typedef bool BOOL_8;
 #endif
 
-#ifdef __CC_ARM
+#ifndef __CC_ARM
 #define INLINE  __inline
 #else
 #define INLINE inline

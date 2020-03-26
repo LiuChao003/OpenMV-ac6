@@ -1,10 +1,10 @@
 #include "fsl_common.h"
 #include "hal_wrapper.h"
-
+#include "cmsis_armclang.h"
 extern __IO uint32_t uwTick;
 
 
-__weak HAL_StatusTypeDef HAL_InitTick(uint32_t TickPriority)
+__WEAK HAL_StatusTypeDef HAL_InitTick(uint32_t TickPriority)
 {
   /*Configure the SysTick to have interrupt in 1ms time basis*/
     // SysTick_Config(SystemCoreClock/1000U);
@@ -25,16 +25,16 @@ void HAL_WFI(void)
 //	#endif
 }
 
-__weak void HAL_IncTick(void)
+__WEAK void HAL_IncTick(void)
 {
   uwTick++;
 }
 
-__weak uint32_t HAL_GetTick(void) {
+__WEAK uint32_t HAL_GetTick(void) {
   return uwTick;
 }
 
-__weak void HAL_Delay(__IO uint32_t Delay)
+__WEAK void HAL_Delay(__IO uint32_t Delay)
 {
     uint32_t start = HAL_GetTick();
 
@@ -43,13 +43,13 @@ __weak void HAL_Delay(__IO uint32_t Delay)
     }
 }
 
-__weak void HAL_SuspendTick(void)
+__WEAK void HAL_SuspendTick(void)
 {
   /* Disable SysTick Interrupt */
   SysTick->CTRL &= ~SysTick_CTRL_TICKINT_Msk;
 }
 
-__weak void HAL_ResumeTick(void)
+__WEAK void HAL_ResumeTick(void)
 {
   /* Enable SysTick Interrupt */
   SysTick->CTRL  |= SysTick_CTRL_TICKINT_Msk;

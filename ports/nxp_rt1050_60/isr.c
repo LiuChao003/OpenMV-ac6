@@ -175,6 +175,7 @@ void HardFault_C_Handler(ExceptionRegisters_t *regs, uint32_t *pXtraRegs, uint32
 	__asm {
 		bkpt	#0
 	}
+//	__asm volatile ("bkpt #0");
 	return;
 	#else
 	__asm volatile ("bkpt #0");
@@ -289,13 +290,14 @@ void HardFault_Handler(void) {
     // was stacked up using the process stack pointer (aka PSP).
 
     __asm volatile(
+	" .global	HardFault_C_Handler   \n" 		
 	" tst lr, #4    \n"         // Test Bit 3 to see which stack pointer we should use.
     " ite eq        \n"         // Tell the assembler that the nest 2 instructions are if-then-else
     " mrseq r0, msp \n"         // Make R0 point to main stack pointer
     " mrsne r0, psp \n"         // Make R0 point to process stack pointer
     " push  {r4-r11, lr} \n"
     " mov   r1, sp  \n"
-    " bl HardFault_C_Handler \n" // Off to C land
+    " bl  HardFault_C_Handler \n" // Off to C land
     " pop  {r4-r11, lr}  \n"
     " bx   lr  \n"
     );
@@ -349,15 +351,16 @@ void MemManage_Handler(void) {
     // was stacked up using the process stack pointer (aka PSP).
 
     __asm volatile(
+		" .global	HardFault_C_Handler   \n" 	
 	    " tst lr, #4    \n"         // Test Bit 3 to see which stack pointer we should use.
 	    " ite eq        \n"         // Tell the assembler that the nest 2 instructions are if-then-else
 	    " mrseq r0, msp \n"         // Make R0 point to main stack pointer
 	    " mrsne r0, psp \n"         // Make R0 point to process stack pointer
-	    " push  {r4-r11, lr} \n"
+	    " push  {r4-r11} \n"
 	    " mov   r1, sp  \n"
 	    " mov   r2, #1  \n"
 	    " bl HardFault_C_Handler \n" // Off to C land
-	    " pop  {r4-r11, lr}  \n"
+	    " pop  {r4-r11}  \n"
 	    " bx   lr  \n"
     );
 }
@@ -576,33 +579,50 @@ void SysTick_C_Handler(ExceptionRegisters_t *regs) {
 }
 
 #ifdef __CC_ARM
-__asm void SysTick_Handler(void) {
-	IMPORT	SysTick_C_Handler
-	PRESERVE8
-	tst lr, #4 
-    ite eq 
-	mrseq r0, msp
-	mrsne r0, psp	
-	push   {lr}
-	bl SysTick_C_Handler  // Off to C land
-	pop    {lr}
-	bx	   lr
+void SysTick_Handler(void) {
+//	IMPORT	SysTick_C_Handler
+//	PRESERVE8
+//	tst lr, #4 
+//    ite eq 
+//	mrseq r0, msp
+//	mrsne r0, psp	
+//	push   {lr}
+//	bl SysTick_C_Handler  // Off to C land
+//	pop    {lr}
+//	bx	   lr
 }
 #else
 __attribute__((naked))
-void SysTick_Handler(void) {
-	__asm volatile (
-		" tst lr, #4	\n" 		// Test Bit 3 to see which stack pointer we should use.
+ void SysTick_Handler(void) {
+//	__asm volatile ("PRESERVE8");
+//	__asm volatile (		
+//	    " .global	SysTick_C_Handler   \n" 	
+//		" .align 8 \n" 		
+//		" tst lr, #4	\n" 		// Test Bit 3 to see which stack pointer we should use.   __asm(".global symbol\n\t");
+//		" ite eq		\n" 		// Tell the assembler that the nest 2 instructions are if-then-else
+//		" mrseq r0, msp \n" 		// Make R0 point to main stack pointer
+//		" mrsne r0, psp \n" 		// Make R0 point to process stack pointer
+//		" push	{r4-r11, lr} \n"
+//		" mov	r1, sp	\n"
+//		" bl SysTick_C_Handler \n" // Off to C land
+//		" pop  {r4-r11, lr}  \n"
+//		" bx   lr  \n"
+//	);
+	 
+	 	__asm volatile (		
+	    " .global	SysTick_C_Handler   \n" 	
+		" .align 8 \n" 		
+		" tst lr, #4	\n" 		// Test Bit 3 to see which stack pointer we should use.   __asm(".global symbol\n\t");
 		" ite eq		\n" 		// Tell the assembler that the nest 2 instructions are if-then-else
 		" mrseq r0, msp \n" 		// Make R0 point to main stack pointer
 		" mrsne r0, psp \n" 		// Make R0 point to process stack pointer
-		" push	{r4-r11, lr} \n"
-		" mov	r1, sp	\n"
+		" push	{lr} \n"
 		" bl SysTick_C_Handler \n" // Off to C land
-		" pop  {r4-r11, lr}  \n"
+		" pop  {lr}  \n"
 		" bx   lr  \n"
 	);
 
+	
 }
 #endif
 
